@@ -1,0 +1,23 @@
+server {
+    keepalive_timeout 0;
+    server_tokens off;
+    server_name  localhost;
+    #listen 8443 http3 reuseport;
+    #listen 8443 ssl;
+    listen 443 quic reuseport;
+    #listen 443 http3 reuseport;
+    ssl_certificate      cert.crt;
+    ssl_certificate_key  cert.key;
+    #ssl_certificate     example.com.crt;
+    #ssl_certificate_key example.com.key;
+    ssl_protocols       TLSv1.3;
+    location / {
+        add_header Alt-Svc 'h3=":8443"; ma=86400';
+        root /var/www/html;
+        index  index.html index.htm;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
