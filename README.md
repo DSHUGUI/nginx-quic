@@ -1,5 +1,5 @@
 ```
-git clone https://github.com/DSHUGUI/nginx-quic.git path
+git clone --depth=1 https://github.com/DSHUGUI/nginx-quic.git some/
 ```
 
 ```
